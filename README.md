@@ -14,7 +14,7 @@
 ### Core Principles
 
 - **Headless First**: Built on `@mui/base` for maximum flexibility
-- **Design Token Driven**: All styles use CSS Custom Properties for easy theming
+- **Design Token Driven**: Powered by Style Dictionary with CSS Custom Properties and JavaScript API
 - **Framework Neutral**: Works with React, Astro, Vue, Svelte, or Vanilla JS
 - **Accessible by Default**: ARIA-compliant components with keyboard navigation
 - **Single Package**: Simple `npm install krado-ui` - no monorepo complexity
@@ -96,23 +96,46 @@ For non-React frameworks, import only the CSS and use semantic class names:
 
 ## 🎨 Theming
 
-Krado UI uses CSS Custom Properties for theming. Override tokens globally or per-component:
+Krado UI uses **Style Dictionary** to generate design tokens in multiple formats. All tokens are available as CSS Custom Properties and JavaScript exports.
+
+### CSS Theming
+
+Override tokens globally or per-component:
 
 ```css
 :root {
   /* Override color tokens */
-  --krado-color-primary: #0066cc;
-  --krado-color-secondary: #6c757d;
+  --krado-color-primary-500: #0066cc;
+  --krado-color-secondary-500: #6c757d;
 
   /* Override spacing tokens */
   --krado-spacing-sm: 0.5rem;
   --krado-spacing-md: 1rem;
 
   /* Override typography tokens */
-  --krado-font-family: 'Inter', sans-serif;
+  --krado-font-family-base: 'Inter', sans-serif;
   --krado-font-size-base: 16px;
 }
 ```
+
+### JavaScript/Programmatic Theming
+
+Import tokens directly in your JavaScript:
+
+```javascript
+import * as tokens from 'krado-ui/src/tokens/tokens.js';
+
+// Use in CSS-in-JS, styled-components, etc.
+const styles = {
+  color: tokens.ColorPrimary500,
+  padding: tokens.SpacingMd,
+  fontFamily: tokens.FontFamilyBase
+};
+```
+
+### Token Source
+
+All design tokens are defined in JSON source files and automatically transformed by Style Dictionary. See [Design Tokens Reference](docs/DESIGN_TOKENS.md) for the complete token catalog.
 
 ---
 
@@ -157,13 +180,25 @@ npm run build
 ```
 krado-ui/
 ├── src/
+│   ├── tokens/
+│   │   ├── source/       # JSON token definitions (edit these)
+│   │   ├── tokens.js     # Generated JavaScript tokens
+│   │   └── tokens.d.ts   # Generated TypeScript definitions
 │   ├── components/       # React components
 │   ├── styles/
-│   │   ├── tokens/       # Design tokens (CSS Custom Properties)
+│   │   ├── tokens/       # Generated CSS Custom Properties
 │   │   └── components/   # Component-specific styles
 │   └── index.js          # Main entry point
+├── style-dictionary.config.mjs  # Token build configuration
 └── dist/                 # Build output (generated)
 ```
+
+### Build Scripts
+
+- `npm run tokens` - Build design tokens from JSON source
+- `npm run tokens:watch` - Watch and rebuild tokens on changes
+- `npm run build` - Build tokens + library bundle
+- `npm run dev` - Start development server
 
 ---
 
@@ -194,7 +229,9 @@ limitations under the License.
 - [Krado Life Design System Documentation](https://krado.design)
 - [Base UI Documentation](https://mui.com/base-ui/)
 - [Design Tokens Reference](docs/DESIGN_TOKENS.md)
+- [Style Dictionary Integration](docs/STYLE_DICTIONARY.md)
 - [Architecture Overview](docs/ARCHITECTURE.md)
+- [Token Source Files](src/tokens/source/)
 
 ---
 

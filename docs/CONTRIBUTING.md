@@ -170,38 +170,148 @@ We are committed to providing a welcoming and inclusive environment. All contrib
 
 ## Design Token Guidelines
 
+### Working with Design Tokens
+
+Krado UI uses **Style Dictionary** to transform JSON token definitions into CSS, JavaScript, and TypeScript outputs. **Never manually edit generated files**.
+
 ### Adding New Tokens
 
-1. **Identify the category**: colors, typography, spacing, shadows
-2. **Choose a semantic name**: `--krado-{category}-{property}-{variant}`
-3. **Add to appropriate token file**: `src/styles/tokens/{category}.css`
+1. **Edit JSON source file** in `src/tokens/source/`:
+   ```json
+   {
+     "color": {
+       "brand": {
+         "accent": { "value": "#ff5722" }
+       }
+     }
+   }
+   ```
+
+2. **Use token references** for consistency:
+   ```json
+   {
+     "color": {
+       "primary": {
+         "500": { "value": "#2196f3" },
+         "base": { "value": "{color.primary.500}" }
+       }
+     }
+   }
+   ```
+
+3. **Build tokens**:
+   ```bash
+   npm run tokens
+   ```
+
+4. **Verify outputs** were generated correctly:
+   - CSS: `src/styles/tokens/generated.css`
+   - JavaScript: `src/tokens/tokens.js`
+   - TypeScript: `src/tokens/tokens.d.ts`
+
+5. **Commit all changes** (source JSON + generated files)
+
+### Token Categories
+
+| File | Category | Examples |
+|------|----------|----------|
+| `color.json` | Colors | primary, secondary, semantic, text, backgrounds |
+| `typography.json` | Typography | font families, sizes, weights, line heights |
+| `spacing.json` | Spacing | padding, margins, border radius |
+| `shadow.json` | Shadows | elevation, focus rings, z-index |
 
 ### Token Naming Convention
 
-```css
-/* Colors */
---krado-color-{name}-{shade}
---krado-color-primary-500
+```json
+// Source JSON structure
+{
+  "category": {
+    "subcategory": {
+      "property": { "value": "actual-value" }
+    }
+  }
+}
 
-/* Typography */
---krado-font-{property}-{variant}
---krado-font-size-lg
-
-/* Spacing */
---krado-spacing-{size}
---krado-spacing-md
-
-/* Shadows */
---krado-shadow-{variant}
---krado-shadow-lg
+// Example
+{
+  "color": {
+    "primary": {
+      "500": { "value": "#2196f3" }
+    }
+  }
+}
 ```
+
+**Outputs:**
+
+- CSS: `--krado-color-primary-500`
+- JavaScript: `ColorPrimary500`
+- TypeScript: `ColorPrimary500: string`
 
 ### Token Best Practices
 
-- Always use semantic names, not descriptive ones
-- Document the purpose of each token
-- Maintain consistency with existing token scales
-- Avoid hardcoded values in component styles
+- **Edit source JSON only** - Never manually edit generated files
+- **Use semantic names** - `primary` not `blue`, `spacing.md` not `spacing.16`
+- **Leverage references** - Use `{category.property}` syntax to reference other tokens
+- **Run build after changes** - Always run `npm run tokens` after editing
+- **Test in components** - Verify tokens work in actual component usage
+- **Document new categories** - Update `DESIGN_TOKENS.md` for new token types
+- **Maintain scales** - Add tokens that fit existing progressions
+
+### Token Build Commands
+
+```bash
+# Build tokens once
+npm run tokens
+
+# Watch for changes and rebuild automatically
+npm run tokens:watch
+
+# Build tokens + full library
+npm run build
+```
+
+### Example Token Workflow
+
+1. Need a new brand color:
+   ```bash
+   # Edit src/tokens/source/color.json
+   vim src/tokens/source/color.json
+   ```
+
+2. Add the token:
+   ```json
+   {
+     "color": {
+       "brand": {
+         "accent": { "value": "#ff5722" }
+       }
+     }
+   }
+   ```
+
+3. Build and verify:
+   ```bash
+   npm run tokens
+   cat src/styles/tokens/generated.css | grep accent
+   # Output: --krado-color-brand-accent: #ff5722;
+   ```
+
+4. Use in component:
+   ```css
+   .my-component {
+     color: var(--krado-color-brand-accent);
+   }
+   ```
+
+5. Commit changes:
+   ```bash
+   git add src/tokens/source/color.json
+   git add src/styles/tokens/generated.css
+   git add src/tokens/tokens.js
+   git add src/tokens/tokens.d.ts
+   git commit -m "feat: add brand accent color token"
+   ```
 
 ---
 
@@ -253,6 +363,7 @@ npm run lint    # Check for linting errors
 
 2. **Run checks**:
    ```bash
+   npm run tokens  # Build tokens if you changed JSON source
    npm run lint
    npm run format
    npm run build

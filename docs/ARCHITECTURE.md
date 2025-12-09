@@ -26,7 +26,7 @@ Components can be used in multiple ways:
 
 ### 3. **Design Token Foundation**
 
-All visual styling is driven by CSS Custom Properties, making theming and customization trivial without touching component code.
+All visual styling is driven by CSS Custom Properties generated from JSON source files using **Style Dictionary**. This provides a single source of truth that outputs both CSS variables and JavaScript modules, making theming and customization trivial without touching component code.
 
 ---
 
@@ -35,35 +35,41 @@ All visual styling is driven by CSS Custom Properties, making theming and custom
 ```
 krado-ui/
 ├── src/
-│   ├── components/           # React component implementations
+│   ├── tokens/
+│   │   ├── source/            # JSON token definitions (EDIT THESE)
+│   │   │   ├── color.json
+│   │   │   ├── typography.json
+│   │   │   ├── spacing.json
+│   │   │   └── shadow.json
+│   │   ├── tokens.js          # Generated JavaScript tokens
+│   │   ├── tokens.d.ts        # Generated TypeScript definitions
+│   │   └── README.md
+│   │
+│   ├── components/            # React component implementations
 │   │   ├── Button/
-│   │   │   ├── KradoButton.jsx    # Component logic
-│   │   │   └── index.js           # Export barrel
+│   │   │   ├── KradoButton.jsx
+│   │   │   └── index.js
 │   │   ├── Input/
-│   │   └── index.js          # Aggregate exports
+│   │   └── index.js
 │   │
 │   ├── styles/
-│   │   ├── tokens/           # Design system tokens
-│   │   │   ├── colors.css
-│   │   │   ├── typography.css
-│   │   │   ├── spacing.css
-│   │   │   ├── shadows.css
-│   │   │   └── index.css
-│   │   │
-│   │   ├── components/       # Component-specific styles
+│   │   ├── tokens/
+│   │   │   ├── generated.css  # Generated from JSON source
+│   │   │   └── index.css      # Imports generated.css
+│   │   ├── components/        # Component-specific styles
 │   │   │   ├── button.css
 │   │   │   ├── input.css
 │   │   │   └── index.css
-│   │   │
-│   │   └── index.css         # Main stylesheet entry
+│   │   └── index.css          # Main stylesheet entry
 │   │
-│   └── index.js              # Package entry point
+│   └── index.js               # Package entry point
 │
-├── examples/                 # Usage examples
-├── docs/                     # Documentation
-└── dist/                     # Build output (generated)
-    ├── krado-ui.js           # ESM JavaScript bundle
-    └── krado-ui.css          # Compiled stylesheet
+├── style-dictionary.config.mjs  # Token build configuration
+├── examples/                  # Usage examples
+├── docs/                      # Documentation
+└── dist/                      # Build output (generated)
+    ├── krado-ui.js            # ESM JavaScript bundle
+    └── krado-ui.css           # Compiled stylesheet
 ```
 
 ---
@@ -86,6 +92,61 @@ Krado UI uses **Vite** with **Rollup** for bundling:
 
 - `dist/krado-ui.js` - ESM JavaScript bundle
 - `dist/krado-ui.css` - Compiled stylesheet with all tokens and component styles
+
+### Style Dictionary Pipeline
+
+Krado UI uses **Style Dictionary** to transform design tokens from JSON into multiple formats:
+
+**Source → Transform → Output:**
+
+```
+src/tokens/source/*.json  →  Style Dictionary  →  CSS + JS + TS
+   (Single Source)            (Transformer)       (Multi-Format)
+```
+
+**Key Features:**
+
+1. **JSON Source Files**: All tokens defined in `src/tokens/source/`
+2. **Token References**: Tokens can reference other tokens using `{category.property.variant}` syntax
+3. **Multi-Format Output**:
+   - CSS: `src/styles/tokens/generated.css` (CSS Custom Properties with `--krado-` prefix)
+   - JavaScript: `src/tokens/tokens.js` (ESM module exports)
+   - TypeScript: `src/tokens/tokens.d.ts` (Type definitions)
+4. **Build Integration**: Tokens are built before library compilation
+
+**Build Command:**
+
+```bash
+npm run tokens      # Build tokens once
+npm run build       # Build tokens + library
+```
+
+**Token Transformation Example:**
+
+```json
+// src/tokens/source/color.json
+{
+  "color": {
+    "primary": {
+      "500": { "value": "#2196f3" }
+    }
+  }
+}
+```
+
+Transforms to:
+
+```css
+/* src/styles/tokens/generated.css */
+:root {
+  --krado-color-primary-500: #2196f3;
+}
+```
+
+```javascript
+// src/tokens/tokens.js
+export const ColorPrimary500 = "#2196f3";
+```
 
 ---
 
@@ -137,17 +198,22 @@ export const KradoComponent = React.forwardRef(({
 
 ### CSS Architecture
 
-1. **Design Tokens** (`src/styles/tokens/`)
-   - Define all visual primitives as CSS Custom Properties
-   - No hardcoded values in component styles
-   - Example: `--krado-color-primary`, `--krado-spacing-md`
+1. **Design Token Source** (`src/tokens/source/`)
+   - JSON files define all design decisions
+   - Single source of truth for the design system
+   - Token references for consistency
 
-2. **Component Styles** (`src/styles/components/`)
+2. **Generated Design Tokens** (`src/styles/tokens/generated.css`)
+   - Auto-generated CSS Custom Properties with `--krado-` prefix
+   - Never manually edited
+   - Rebuilt with `npm run tokens`
+
+3. **Component Styles** (`src/styles/components/`)
    - Use only design tokens for styling
    - BEM-inspired naming: `.krado-button--primary`
    - State classes: `:hover`, `:focus`, `:disabled`
 
-3. **CSS Import Chain**
+4. **CSS Import Chain**
 
 ```
 src/index.js

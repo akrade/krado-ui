@@ -1,9 +1,15 @@
 /**
  * Krado UI - Design Tokens Index
- * Aggregates all design token files
+ *
+ * This file imports the auto-generated design tokens.
+ * The tokens are generated from JSON source files using Style Dictionary.
+ *
+ * Source: src/tokens/source/*.json
+ * Build: npm run tokens
  */
 
-@import './colors.css';
-@import './typography.css';
-@import './spacing.css';
-@import './shadows.css';
+/* Import generated design tokens */
+@import './generated.css';
+
+/* Legacy manual token files are kept for reference but no longer imported */
+/* See: colors.css, typography.css, spacing.css, shadows.css */
