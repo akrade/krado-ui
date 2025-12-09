@@ -1,0 +1,70 @@
+/**
+ * Krado UI - Color Design Tokens
+ * Define the color palette using CSS Custom Properties
+ */
+
+:root {
+  /* Primary Colors */
+  --krado-color-primary-50: #e3f2fd;
+  --krado-color-primary-100: #bbdefb;
+  --krado-color-primary-200: #90caf9;
+  --krado-color-primary-300: #64b5f6;
+  --krado-color-primary-400: #42a5f5;
+  --krado-color-primary-500: #2196f3;
+  --krado-color-primary-600: #1e88e5;
+  --krado-color-primary-700: #1976d2;
+  --krado-color-primary-800: #1565c0;
+  --krado-color-primary-900: #0d47a1;
+
+  /* Secondary Colors */
+  --krado-color-secondary-50: #f3e5f5;
+  --krado-color-secondary-100: #e1bee7;
+  --krado-color-secondary-200: #ce93d8;
+  --krado-color-secondary-300: #ba68c8;
+  --krado-color-secondary-400: #ab47bc;
+  --krado-color-secondary-500: #9c27b0;
+  --krado-color-secondary-600: #8e24aa;
+  --krado-color-secondary-700: #7b1fa2;
+  --krado-color-secondary-800: #6a1b9a;
+  --krado-color-secondary-900: #4a148c;
+
+  /* Neutral/Gray Colors */
+  --krado-color-gray-50: #fafafa;
+  --krado-color-gray-100: #f5f5f5;
+  --krado-color-gray-200: #eeeeee;
+  --krado-color-gray-300: #e0e0e0;
+  --krado-color-gray-400: #bdbdbd;
+  --krado-color-gray-500: #9e9e9e;
+  --krado-color-gray-600: #757575;
+  --krado-color-gray-700: #616161;
+  --krado-color-gray-800: #424242;
+  --krado-color-gray-900: #212121;
+
+  /* Semantic Colors */
+  --krado-color-success: #4caf50;
+  --krado-color-warning: #ff9800;
+  --krado-color-error: #f44336;
+  --krado-color-info: #2196f3;
+
+  /* Text Colors */
+  --krado-color-text-primary: rgba(0, 0, 0, 0.87);
+  --krado-color-text-secondary: rgba(0, 0, 0, 0.6);
+  --krado-color-text-disabled: rgba(0, 0, 0, 0.38);
+
+  /* Background Colors */
+  --krado-color-background-default: #ffffff;
+  --krado-color-background-paper: #f5f5f5;
+  --krado-color-background-elevated: #ffffff;
+
+  /* Border Colors */
+  --krado-color-border-default: rgba(0, 0, 0, 0.12);
+  --krado-color-border-light: rgba(0, 0, 0, 0.08);
+  --krado-color-border-dark: rgba(0, 0, 0, 0.24);
+
+  /* Shortcuts - Most commonly used colors */
+  --krado-color-primary: var(--krado-color-primary-500);
+  --krado-color-secondary: var(--krado-color-secondary-500);
+  --krado-color-text: var(--krado-color-text-primary);
+  --krado-color-background: var(--krado-color-background-default);
+  --krado-color-border: var(--krado-color-border-default);
+}
