@@ -1,6 +1,6 @@
 # Krado UI Design Tokens
 
-Design tokens are the visual design atoms of the Krado UI system. They are implemented as CSS Custom Properties and serve as the single source of truth for all styling decisions.
+Design tokens are the visual design atoms of the Krado UI system. They are defined in JSON source files and transformed by **Style Dictionary** into multiple formats: CSS Custom Properties, JavaScript modules, and TypeScript definitions.
 
 ---
 
@@ -8,21 +8,46 @@ Design tokens are the visual design atoms of the Krado UI system. They are imple
 
 Design tokens provide:
 
+- **Single Source of Truth**: JSON source files define all tokens
 - **Consistency**: Unified visual language across all components
 - **Maintainability**: Change once, update everywhere
+- **Multi-Format Output**: CSS, JavaScript, and TypeScript from one source
 - **Theming**: Easy customization without touching component code
 - **Framework Agnostic**: Works with any CSS-capable framework
 
 ---
 
+## Token System Architecture
+
+```
+JSON Source Files → Style Dictionary → Multiple Outputs
+   (Edit These)      (Transformer)      (Auto-Generated)
+
+src/tokens/source/                  src/styles/tokens/generated.css
+├── color.json       ────┐          src/tokens/tokens.js
+├── typography.json      ├─────→    src/tokens/tokens.d.ts
+├── spacing.json     ────┘
+└── shadow.json
+```
+
+---
+
 ## Token Categories
 
-Krado UI organizes tokens into four primary categories:
+Krado UI organizes tokens into four primary categories defined in JSON source files:
 
-1. **Colors** - Brand colors, semantic colors, text, backgrounds, borders
-2. **Typography** - Fonts, sizes, weights, line heights, letter spacing
-3. **Spacing** - Padding, margins, gaps, border radius
-4. **Shadows** - Elevation levels, focus rings, depth
+1. **Colors** ([`color.json`](../src/tokens/source/color.json)) - Brand colors, semantic colors, text, backgrounds, borders
+2. **Typography** ([`typography.json`](../src/tokens/source/typography.json)) - Fonts, sizes, weights, line heights, letter spacing
+3. **Spacing** ([`spacing.json`](../src/tokens/source/spacing.json)) - Padding, margins, gaps, border radius
+4. **Shadows** ([`shadow.json`](../src/tokens/source/shadow.json)) - Elevation levels, focus rings, depth
+
+### Editing Tokens
+
+To modify design tokens:
+
+1. Edit the JSON source files in [`src/tokens/source/`](../src/tokens/source/)
+2. Run `npm run tokens` to regenerate outputs
+3. Commit both source and generated files
 
 ---
 
@@ -43,22 +68,23 @@ Full spectrum from 50-900 for flexible theming:
 --krado-color-primary-700: #1976d2;
 --krado-color-primary-800: #1565c0;
 --krado-color-primary-900: #0d47a1;
+--krado-color-primary-base: #2196f3;  /* References primary-500 */
 ```
 
 ### Secondary Colors
 
 ```css
 --krado-color-secondary-500: #9c27b0;  /* Base secondary */
-/* Full spectrum also available */
+/* Full spectrum 50-900 also available */
 ```
 
 ### Semantic Colors
 
 ```css
---krado-color-success: #4caf50;
---krado-color-warning: #ff9800;
---krado-color-error: #f44336;
---krado-color-info: #2196f3;
+--krado-color-semantic-success: #4caf50;
+--krado-color-semantic-warning: #ff9800;
+--krado-color-semantic-error: #f44336;
+--krado-color-semantic-info: #2196f3;
 ```
 
 ### Neutral/Gray Colors
@@ -154,25 +180,20 @@ Full spectrum from 50-900 for flexible theming:
 --krado-spacing-2: 0.5rem;    /* 8px */
 --krado-spacing-3: 0.75rem;   /* 12px */
 --krado-spacing-4: 1rem;      /* 16px */
---krado-spacing-5: 1.25rem;   /* 20px */
 --krado-spacing-6: 1.5rem;    /* 24px */
 --krado-spacing-8: 2rem;      /* 32px */
---krado-spacing-10: 2.5rem;   /* 40px */
 --krado-spacing-12: 3rem;     /* 48px */
 --krado-spacing-16: 4rem;     /* 64px */
---krado-spacing-20: 5rem;     /* 80px */
---krado-spacing-24: 6rem;     /* 96px */
---krado-spacing-32: 8rem;     /* 128px */
 ```
 
 ### Semantic Spacing
 
 ```css
---krado-spacing-xs: var(--krado-spacing-1);   /* 4px */
---krado-spacing-sm: var(--krado-spacing-2);   /* 8px */
---krado-spacing-md: var(--krado-spacing-4);   /* 16px */
---krado-spacing-lg: var(--krado-spacing-6);   /* 24px */
---krado-spacing-xl: var(--krado-spacing-8);   /* 32px */
+--krado-spacing-xs: 0.25rem;  /* 4px */
+--krado-spacing-sm: 0.5rem;   /* 8px */
+--krado-spacing-md: 1rem;     /* 16px */
+--krado-spacing-lg: 1.5rem;   /* 24px */
+--krado-spacing-xl: 2rem;     /* 32px */
 ```
 
 ### Border Radius
@@ -184,7 +205,6 @@ Full spectrum from 50-900 for flexible theming:
 --krado-border-radius-md: 0.375rem;   /* 6px */
 --krado-border-radius-lg: 0.5rem;     /* 8px */
 --krado-border-radius-xl: 0.75rem;    /* 12px */
---krado-border-radius-2xl: 1rem;      /* 16px */
 --krado-border-radius-full: 9999px;   /* Pill shape */
 ```
 
@@ -201,8 +221,6 @@ Full spectrum from 50-900 for flexible theming:
 --krado-shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), ...;
 --krado-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), ...;
 --krado-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), ...;
---krado-shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
---krado-shadow-2xl: 0 50px 100px -20px rgba(0, 0, 0, 0.25);
 ```
 
 ### Focus Rings
@@ -218,8 +236,6 @@ Full spectrum from 50-900 for flexible theming:
 ```css
 --krado-z-index-dropdown: 1000;
 --krado-z-index-sticky: 1020;
---krado-z-index-fixed: 1030;
---krado-z-index-modal-backdrop: 1040;
 --krado-z-index-modal: 1050;
 --krado-z-index-tooltip: 1070;
 ```
@@ -228,11 +244,13 @@ Full spectrum from 50-900 for flexible theming:
 
 ## Using Design Tokens
 
-### In CSS
+### Method 1: CSS Custom Properties
+
+Generated in `src/styles/tokens/generated.css` and automatically included in component styles.
 
 ```css
 .my-component {
-  color: var(--krado-color-primary);
+  color: var(--krado-color-primary-500);
   padding: var(--krado-spacing-md);
   font-size: var(--krado-font-size-lg);
   border-radius: var(--krado-border-radius-md);
@@ -240,24 +258,44 @@ Full spectrum from 50-900 for flexible theming:
 }
 ```
 
-### In JavaScript (React)
+### Method 2: JavaScript/ESM Module
 
-```jsx
+Generated in `src/tokens/tokens.js` for programmatic access.
+
+```javascript
+import * as tokens from './src/tokens/tokens.js';
+
 const styles = {
-  color: 'var(--krado-color-primary)',
-  padding: 'var(--krado-spacing-md)'
+  color: tokens.ColorPrimary500,
+  padding: tokens.SpacingMd,
+  fontSize: tokens.FontSizeLg
 };
 
-<div style={styles}>Content</div>
+// Use in styled-components, emotion, etc.
+const Button = styled.button`
+  background: ${tokens.ColorPrimary500};
+  padding: ${tokens.SpacingMd};
+`;
 ```
 
-### Global Theming
+### Method 3: TypeScript
+
+Full type safety with generated TypeScript definitions.
+
+```typescript
+import * as tokens from './src/tokens/tokens.js';
+
+// TypeScript knows all available tokens
+const color: string = tokens.ColorPrimary500;
+```
+
+### Global CSS Theming
 
 Override tokens at the root level:
 
 ```css
 :root {
-  --krado-color-primary: #9c27b0;
+  --krado-color-primary-500: #9c27b0;
   --krado-spacing-md: 1.5rem;
   --krado-border-radius-md: 12px;
 }
@@ -276,21 +314,89 @@ Override tokens at the root level:
 
 ## Best Practices
 
-1. **Always use tokens** - Never hardcode values in component styles
-2. **Use semantic tokens** - Prefer `--krado-spacing-md` over `--krado-spacing-4`
-3. **Maintain the scale** - Add new tokens that fit the existing progression
-4. **Document new tokens** - Explain purpose and usage context
-5. **Test overrides** - Ensure tokens can be customized without breaking
+1. **Edit source JSON files only** - Never manually edit generated files
+2. **Use semantic tokens** - Prefer `spacing.md` over `spacing.4` in JSON
+3. **Leverage token references** - Use `{color.primary.500}` to reference other tokens
+4. **Run build after changes** - Always run `npm run tokens` after editing
+5. **Maintain the scale** - Add new tokens that fit the existing progression
+6. **Document new tokens** - Explain purpose and usage context
+7. **Test overrides** - Ensure tokens can be customized without breaking
 
 ---
 
 ## Adding New Tokens
 
-1. Identify the appropriate category
-2. Follow the naming convention: `--krado-{category}-{property}-{variant}`
-3. Add to the relevant file in `src/styles/tokens/`
-4. Document in this file
-5. Test in multiple components
+### 1. Edit JSON Source File
+
+Choose the appropriate category file in [`src/tokens/source/`](../src/tokens/source/):
+
+```json
+{
+  "color": {
+    "brand": {
+      "accent": { "value": "#ff5722" }
+    }
+  }
+}
+```
+
+### 2. Use Token References
+
+Reference other tokens for consistency:
+
+```json
+{
+  "color": {
+    "primary": {
+      "500": { "value": "#2196f3" },
+      "base": { "value": "{color.primary.500}" }
+    },
+    "button": {
+      "background": { "value": "{color.primary.base}" }
+    }
+  }
+}
+```
+
+### 3. Build Tokens
+
+```bash
+npm run tokens
+```
+
+This generates:
+- CSS: `--krado-color-brand-accent`
+- JS: `ColorBrandAccent`
+
+### 4. Commit Changes
+
+Commit both source JSON files and generated outputs.
+
+---
+
+## Token Naming Convention
+
+| Source JSON | CSS Variable | JavaScript Export |
+|-------------|--------------|-------------------|
+| `color.primary.500` | `--krado-color-primary-500` | `ColorPrimary500` |
+| `spacing.md` | `--krado-spacing-md` | `SpacingMd` |
+| `font.family.base` | `--krado-font-family-base` | `FontFamilyBase` |
+| `shadow.focus.primary` | `--krado-shadow-focus-primary` | `ShadowFocusPrimary` |
+
+---
+
+## Build Workflow
+
+```bash
+# Build tokens once
+npm run tokens
+
+# Watch for changes and rebuild automatically
+npm run tokens:watch
+
+# Build tokens + build library
+npm run build
+```
 
 ---
 
@@ -303,4 +409,11 @@ Override tokens at the root level:
 
 ---
 
-For more details, see the source files in [`src/styles/tokens/`](../src/styles/tokens/).
+## Resources
+
+- **Token Source Files**: [`src/tokens/source/`](../src/tokens/source/)
+- **Generated CSS**: [`src/styles/tokens/generated.css`](../src/styles/tokens/generated.css)
+- **Generated JavaScript**: [`src/tokens/tokens.js`](../src/tokens/tokens.js)
+- **Style Dictionary Config**: [`style-dictionary.config.mjs`](../style-dictionary.config.mjs)
+- **Style Dictionary Guide**: [STYLE_DICTIONARY.md](./STYLE_DICTIONARY.md)
+- **Style Dictionary Docs**: https://amzn.github.io/style-dictionary/
