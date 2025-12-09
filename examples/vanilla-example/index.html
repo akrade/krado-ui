@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krado UI - Vanilla JavaScript Example</title>
+
+  <!-- Import Krado UI Styles -->
+  <link rel="stylesheet" href="../../dist/krado-ui.css">
+
+  <style>
+    body {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    .button-grid {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Krado UI - Vanilla JavaScript Example</h1>
+  <p>
+    This example demonstrates using Krado UI components with plain HTML and JavaScript,
+    without React or any other framework.
+  </p>
+
+  <!-- Button Examples -->
+  <section>
+    <h2>Button Examples</h2>
+
+    <div class="button-grid">
+      <button class="krado-button" onclick="handleClick()">
+        Primary Button
+      </button>
+
+      <button class="krado-button krado-button--secondary">
+        Secondary
+      </button>
+
+      <button class="krado-button krado-button--outline">
+        Outline
+      </button>
+
+      <button class="krado-button krado-button--ghost">
+        Ghost
+      </button>
+
+      <button class="krado-button krado-button--danger">
+        Danger
+      </button>
+
+      <button class="krado-button krado-button--success">
+        Success
+      </button>
+    </div>
+
+    <div class="button-grid">
+      <button class="krado-button krado-button--sm">Small</button>
+      <button class="krado-button">Medium (Default)</button>
+      <button class="krado-button krado-button--lg">Large</button>
+      <button class="krado-button krado-button--loading">Loading</button>
+      <button class="krado-button" disabled>Disabled</button>
+    </div>
+  </section>
+
+  <!-- Input Examples -->
+  <section>
+    <h2>Input Examples</h2>
+
+    <form onsubmit="handleFormSubmit(event)">
+      <div class="form-group">
+        <label for="name" class="krado-input-label krado-input-label--required">
+          Name
+        </label>
+        <input
+          id="name"
+          type="text"
+          class="krado-input"
+          placeholder="Enter your name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="krado-input-label krado-input-label--required">
+          Email
+        </label>
+        <input
+          id="email"
+          type="email"
+          class="krado-input"
+          placeholder="Enter your email"
+          required
+        />
+        <span class="krado-input-helper-text">
+          We'll never share your email with anyone
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="krado-input-label">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          class="krado-input"
+          placeholder="Enter password"
+        />
+        <span class="krado-input-helper-text">
+          Must be at least 8 characters
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="success-input" class="krado-input-label">
+          Success State
+        </label>
+        <input
+          id="success-input"
+          type="text"
+          class="krado-input krado-input--success"
+          value="Valid input"
+        />
+        <span class="krado-input-helper-text krado-input-helper-text--success">
+          This field is valid!
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="error-input" class="krado-input-label">
+          Error State
+        </label>
+        <input
+          id="error-input"
+          type="text"
+          class="krado-input krado-input--error"
+          value="Invalid input"
+        />
+        <span class="krado-input-helper-text krado-input-helper-text--error">
+          This field has an error!
+        </span>
+      </div>
+
+      <div class="button-grid">
+        <button type="submit" class="krado-button">
+          Submit Form
+        </button>
+        <button type="reset" class="krado-button krado-button--outline">
+          Reset
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Input Sizes -->
+  <section>
+    <h2>Input Sizes</h2>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="krado-input krado-input--sm"
+        placeholder="Small input"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="krado-input"
+        placeholder="Medium input (default)"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="krado-input krado-input--lg"
+        placeholder="Large input"
+      />
+    </div>
+  </section>
+
+  <!-- Theme Customization Example -->
+  <section>
+    <h2>Theme Customization</h2>
+    <p>
+      You can customize the theme by overriding CSS custom properties.
+      Click the button below to toggle a custom theme.
+    </p>
+
+    <button class="krado-button" onclick="toggleTheme()">
+      Toggle Custom Theme
+    </button>
+
+    <div id="theme-preview" style="margin-top: 1rem; padding: 1rem; border: 1px solid var(--krado-color-border); border-radius: var(--krado-border-radius-md);">
+      <p>This area uses the current theme colors.</p>
+      <button class="krado-button">Themed Button</button>
+    </div>
+  </section>
+
+  <script>
+    let clickCount = 0;
+    let customThemeActive = false;
+
+    function handleClick() {
+      clickCount++;
+      alert(`Button clicked ${clickCount} time(s)!`);
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData.entries());
+
+      alert(`Form submitted!\n\n${JSON.stringify(data, null, 2)}`);
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      customThemeActive = !customThemeActive;
+
+      if (customThemeActive) {
+        // Apply custom theme
+        root.style.setProperty('--krado-color-primary', '#9c27b0');
+        root.style.setProperty('--krado-color-secondary', '#ff5722');
+        root.style.setProperty('--krado-border-radius-md', '1rem');
+      } else {
+        // Reset to default theme
+        root.style.removeProperty('--krado-color-primary');
+        root.style.removeProperty('--krado-color-secondary');
+        root.style.removeProperty('--krado-border-radius-md');
+      }
+    }
+  </script>
+</body>
+</html>

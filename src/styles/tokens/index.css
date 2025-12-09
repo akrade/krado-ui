@@ -1,0 +1,9 @@
+/**
+ * Krado UI - Design Tokens Index
+ * Aggregates all design token files
+ */
+
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+@import './shadows.css';

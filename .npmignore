@@ -1,0 +1,27 @@
+# Source files (only ship dist/)
+src/
+examples/
+docs/
+
+# Configuration
+.gitignore
+.eslintrc.*
+.prettierrc.*
+vite.config.js
+tsconfig.json
+
+# Development
+node_modules/
+.vscode/
+.idea/
+*.log
+
+# Testing
+coverage/
+*.test.js
+*.spec.js
+
+# Misc
+.DS_Store
+*.md
+!README.md

@@ -1,0 +1,198 @@
+/**
+ * Krado UI - Input Component Styles
+ * Built on Base UI with design token styling
+ */
+
+/* Input Wrapper Container */
+.krado-input-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--krado-spacing-1);
+  width: 100%;
+}
+
+/* Base Input Styles */
+.krado-input {
+  /* Layout */
+  display: block;
+  width: 100%;
+
+  /* Typography */
+  font-family: var(--krado-font-family-base);
+  font-size: var(--krado-font-size-base);
+  font-weight: var(--krado-font-weight-normal);
+  line-height: var(--krado-line-height-normal);
+  color: var(--krado-color-text-primary);
+
+  /* Spacing */
+  padding: var(--krado-spacing-input-padding-y) var(--krado-spacing-input-padding-x);
+
+  /* Border */
+  border: var(--krado-border-width-default) solid var(--krado-color-border);
+  border-radius: var(--krado-border-radius-md);
+
+  /* Visual */
+  background-color: var(--krado-color-background-default);
+  box-shadow: var(--krado-shadow-xs);
+
+  /* Interaction */
+  transition: all 0.2s ease-in-out;
+  outline: none;
+
+  /* Prevent iOS zoom on focus */
+  -webkit-appearance: none;
+}
+
+/* Placeholder */
+.krado-input::placeholder {
+  color: var(--krado-color-text-secondary);
+  opacity: 0.7;
+}
+
+/* Hover State */
+.krado-input:hover:not(:disabled) {
+  border-color: var(--krado-color-primary-300);
+}
+
+/* Focus State */
+.krado-input:focus {
+  border-color: var(--krado-color-primary);
+  box-shadow: var(--krado-shadow-focus-primary);
+}
+
+/* Disabled State */
+.krado-input:disabled,
+.krado-input[aria-disabled="true"] {
+  background-color: var(--krado-color-gray-100);
+  color: var(--krado-color-text-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Read-only State */
+.krado-input:read-only {
+  background-color: var(--krado-color-gray-50);
+  cursor: default;
+}
+
+/* ========================================
+   INPUT VARIANTS
+   ======================================== */
+
+/* Error State */
+.krado-input--error {
+  border-color: var(--krado-color-error);
+}
+
+.krado-input--error:focus {
+  box-shadow: var(--krado-shadow-focus-error);
+}
+
+/* Success State */
+.krado-input--success {
+  border-color: var(--krado-color-success);
+}
+
+.krado-input--success:focus {
+  box-shadow: var(--krado-shadow-focus-success);
+}
+
+/* ========================================
+   INPUT SIZES
+   ======================================== */
+
+.krado-input--sm {
+  font-size: var(--krado-font-size-sm);
+  padding: var(--krado-spacing-1) var(--krado-spacing-2);
+}
+
+.krado-input--lg {
+  font-size: var(--krado-font-size-lg);
+  padding: var(--krado-spacing-3) var(--krado-spacing-4);
+}
+
+/* ========================================
+   INPUT LABEL
+   ======================================== */
+
+.krado-input-label {
+  display: block;
+  font-size: var(--krado-font-size-sm);
+  font-weight: var(--krado-font-weight-medium);
+  color: var(--krado-color-text-primary);
+  margin-bottom: var(--krado-spacing-1);
+}
+
+.krado-input-label--required::after {
+  content: ' *';
+  color: var(--krado-color-error);
+}
+
+/* ========================================
+   INPUT HELPER TEXT
+   ======================================== */
+
+.krado-input-helper-text {
+  font-size: var(--krado-font-size-sm);
+  color: var(--krado-color-text-secondary);
+  margin-top: var(--krado-spacing-1);
+}
+
+.krado-input-helper-text--error {
+  color: var(--krado-color-error);
+}
+
+.krado-input-helper-text--success {
+  color: var(--krado-color-success);
+}
+
+/* ========================================
+   INPUT GROUPS
+   ======================================== */
+
+.krado-input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.krado-input-group .krado-input {
+  border-radius: 0;
+}
+
+.krado-input-group .krado-input:first-child {
+  border-top-left-radius: var(--krado-border-radius-md);
+  border-bottom-left-radius: var(--krado-border-radius-md);
+}
+
+.krado-input-group .krado-input:last-child {
+  border-top-right-radius: var(--krado-border-radius-md);
+  border-bottom-right-radius: var(--krado-border-radius-md);
+}
+
+.krado-input-group .krado-input:not(:last-child) {
+  border-right: none;
+}
+
+/* Input Addon */
+.krado-input-addon {
+  display: flex;
+  align-items: center;
+  padding: var(--krado-spacing-input-padding-y) var(--krado-spacing-input-padding-x);
+  background-color: var(--krado-color-gray-100);
+  border: var(--krado-border-width-default) solid var(--krado-color-border);
+  color: var(--krado-color-text-secondary);
+  font-size: var(--krado-font-size-sm);
+  white-space: nowrap;
+}
+
+.krado-input-addon:first-child {
+  border-right: none;
+  border-top-left-radius: var(--krado-border-radius-md);
+  border-bottom-left-radius: var(--krado-border-radius-md);
+}
+
+.krado-input-addon:last-child {
+  border-left: none;
+  border-top-right-radius: var(--krado-border-radius-md);
+  border-bottom-right-radius: var(--krado-border-radius-md);
+}

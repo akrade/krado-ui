@@ -1,0 +1,51 @@
+/**
+ * Krado UI - Shadow Design Tokens
+ * Define elevation and shadow values for depth
+ */
+
+:root {
+  /* Box Shadows - Elevation Levels */
+  --krado-shadow-none: none;
+
+  --krado-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+  --krado-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+                     0 1px 2px -1px rgba(0, 0, 0, 0.1);
+
+  --krado-shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                       0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+  --krado-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                     0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  --krado-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                     0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  --krado-shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  --krado-shadow-2xl: 0 50px 100px -20px rgba(0, 0, 0, 0.25);
+
+  /* Inner Shadows */
+  --krado-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+
+  /* Focus Ring Shadows */
+  --krado-shadow-focus-primary: 0 0 0 3px rgba(33, 150, 243, 0.3);
+  --krado-shadow-focus-error: 0 0 0 3px rgba(244, 67, 54, 0.3);
+  --krado-shadow-focus-success: 0 0 0 3px rgba(76, 175, 80, 0.3);
+
+  /* Component-Specific Shadows */
+  --krado-shadow-button: var(--krado-shadow-sm);
+  --krado-shadow-button-hover: var(--krado-shadow-md);
+  --krado-shadow-card: var(--krado-shadow-base);
+  --krado-shadow-modal: var(--krado-shadow-2xl);
+  --krado-shadow-dropdown: var(--krado-shadow-lg);
+
+  /* Elevation Z-Index Layers */
+  --krado-z-index-dropdown: 1000;
+  --krado-z-index-sticky: 1020;
+  --krado-z-index-fixed: 1030;
+  --krado-z-index-modal-backdrop: 1040;
+  --krado-z-index-modal: 1050;
+  --krado-z-index-popover: 1060;
+  --krado-z-index-tooltip: 1070;
+}

@@ -1,0 +1,7 @@
+/**
+ * Krado UI - Component Styles Index
+ * Aggregates all component stylesheets
+ */
+
+@import './button.css';
+@import './input.css';

@@ -1,0 +1,65 @@
+{
+  "name": "krado-ui",
+  "version": "0.1.0",
+  "description": "Krado UI Component Library - The coded implementation of the Krado Life Design System",
+  "type": "module",
+  "main": "./dist/krado-ui.js",
+  "module": "./dist/krado-ui.js",
+  "style": "./dist/krado-ui.css",
+  "exports": {
+    ".": {
+      "import": "./dist/krado-ui.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./styles": "./dist/krado-ui.css",
+    "./dist/krado-ui.css": "./dist/krado-ui.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .js,.jsx",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\"",
+    "test": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "krado",
+    "headless-ui",
+    "css-custom-properties",
+    "design-tokens"
+  ],
+  "author": "Krado UI Contributors",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/krado-ui.git"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@mui/base": "^5.0.0-beta.58",
+    "prop-types": "^15.8.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.15.0",
+    "eslint-plugin-react": "^7.37.2",
+    "prettier": "^3.3.3",
+    "vite": "^6.0.1",
+    "vitest": "^2.1.5"
+  }
+}

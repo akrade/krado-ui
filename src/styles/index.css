@@ -1,0 +1,30 @@
+/**
+ * Krado UI - Main Stylesheet
+ * This is the entry point for all Krado UI styles
+ * Import this file to get all design tokens and component styles
+ */
+
+/* CSS Reset - Basic Normalization */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Import Design Tokens */
+@import './tokens/index.css';
+
+/* Import Component Styles */
+@import './components/index.css';
+
+/* Optional: Global Base Styles */
+body {
+  margin: 0;
+  font-family: var(--krado-font-family-base);
+  font-size: var(--krado-font-size-base);
+  line-height: var(--krado-line-height-normal);
+  color: var(--krado-color-text-primary);
+  background-color: var(--krado-color-background-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
