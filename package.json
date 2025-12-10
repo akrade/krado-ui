@@ -19,6 +19,9 @@
     "README.md",
     "LICENSE"
   ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "tokens": "style-dictionary build",
@@ -40,18 +43,30 @@
     "css-custom-properties",
     "design-tokens"
   ],
-  "author": "Krado UI Contributors",
+  "author": "Akrade",
+  "contributors": [
+    {
+      "name": "Dante Taylor",
+      "email": "dante.taylor@akrade.com",
+      "url": "https://github.com/dantetaylor"
+    }
+  ],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/akrade/krado-ui.git"
   },
+  "bugs": {
+    "url": "https://github.com/akrade/krado-ui/issues"
+  },
+  "homepage": "https://github.com/akrade/krado-ui#readme",
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@mui/base": "^5.0.0-beta.58",
+    "krado-ui": "github:akrade/krado-ui#semver:^0.1.0",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
