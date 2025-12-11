@@ -27,8 +27,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "tokens": "style-dictionary build",
-    "tokens:watch": "style-dictionary build --watch",
+    "tokens": "style-dictionary build --config style-dictionary.config.mjs",
+    "tokens:watch": "style-dictionary build --watch --config style-dictionary.config.mjs",
     "build": "npm run tokens && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .js,.jsx",
