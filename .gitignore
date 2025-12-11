@@ -36,3 +36,4 @@ pnpm-debug.log*
 .cache/
 .temp/
 *.tgz
+node_modules
