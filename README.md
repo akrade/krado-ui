@@ -1,6 +1,6 @@
 # Krado UI Component Library
 
-[![npm version](https://img.shields.io/npm/v/krado-ui.svg)](https://www.npmjs.com/package/krado-ui)
+[![npm version](https://img.shields.io/npm/v/krado-ui.svg)](https://www.npmjs.com/package/@akrade/krado-ui)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 > The coded implementation of the **Krado Life Design System** standards.
