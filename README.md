@@ -1,6 +1,6 @@
 # Krado UI Component Library
 
-[![npm version](https://img.shields.io/npm/v/krado-ui.svg)](https://www.npmjs.com/package/@akrade/krado-ui)
+[![npm version](https://img.shields.io/npm/v/%40akrade%2Fkrado-ui.svg)](https://www.npmjs.com/package/@akrade/krado-ui)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 > The coded implementation of the **Krado Life Design System** standards.
@@ -17,7 +17,7 @@
 - **Design Token Driven**: Powered by Style Dictionary with CSS Custom Properties and JavaScript API
 - **Framework Neutral**: Works with React, Astro, Vue, Svelte, or Vanilla JS
 - **Accessible by Default**: ARIA-compliant components with keyboard navigation
-- **Single Package**: Simple `npm install krado-ui` - no monorepo complexity
+- **Single Package**: Simple `npm install @akrade/krado-ui` - no monorepo complexity
 
 ---
 
@@ -26,7 +26,7 @@
 Install the package and its peer dependencies:
 
 ```bash
-npm install krado-ui react react-dom
+npm install @akrade/krado-ui react react-dom
 ```
 
 ### Peer Dependencies
@@ -42,12 +42,12 @@ Krado UI requires the following peer dependencies:
 
 ### React Example
 
-Import components and styles directly from `krado-ui`:
+Import components and styles directly from `@akrade/krado-ui`:
 
 ```jsx
 import { useState } from 'react';
-import { KradoButton } from 'krado-ui';
-import 'krado-ui/dist/krado-ui.css';
+import { KradoButton } from '@akrade/krado-ui';
+import '@akrade/krado-ui/dist/krado-ui.css';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -75,7 +75,7 @@ For non-React frameworks, import only the CSS and use semantic class names:
 
 ```html
 <!-- Import Krado UI styles -->
-<link rel="stylesheet" href="/node_modules/krado-ui/dist/krado-ui.css">
+<link rel="stylesheet" href="/node_modules/@akrade/krado-ui/dist/krado-ui.css">
 ```
 
 **In your component/page:**
@@ -123,7 +123,7 @@ Override tokens globally or per-component:
 Import tokens directly in your JavaScript:
 
 ```javascript
-import * as tokens from 'krado-ui/src/tokens/tokens.js';
+import * as tokens from '@akrade/krado-ui/src/tokens/tokens.js';
 
 // Use in CSS-in-JS, styled-components, etc.
 const styles = {
@@ -162,7 +162,7 @@ All design tokens are defined in JSON source files and automatically transformed
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/krado-ui.git
+git clone https://github.com/akrade/krado-ui.git
 cd krado-ui
 
 # Install dependencies
